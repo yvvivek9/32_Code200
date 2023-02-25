@@ -3,14 +3,18 @@ import { SafeAreaView, StatusBar, StyleSheet, View, TouchableOpacity, Text } fro
 import CButton from "./CButton";
 
 const Tokens = ({navigation}) => {
-  const [show, setShow] = useState(0);
+  const [show, setShow] = useState(false);
   
+  const changeview = () => {
+    setShow(!show)
+  }
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.container}>
         <View style={styles.parent}>
-          <CButton text={"Buy Token"} press={() => alert("Hi")} />
+          <CButton text={"Buy Token"} press={() => changeview()} />
           <CButton text={"View Token"} press={() => navigation.navigate('Display')} />
         </View>
         <Select showTheThing={show}/>
@@ -46,7 +50,7 @@ const Select = ({ showTheThing }) => {
   const Submit = () => alert("Submitted");
 
   return (
-      showTheThing &&
+      showTheThing ?
       <View style={styless.container}>
     
       <View style={styless.countContainer}>
@@ -69,12 +73,13 @@ const Select = ({ showTheThing }) => {
         <Text> Pay Now </Text>
       </TouchableOpacity>
       
-      </View>
+      </View> : null
   );
 };
 
 const styless = StyleSheet.create({
   container: {
+    marginTop: 100
   },
   button: {
     alignItems: 'center',
