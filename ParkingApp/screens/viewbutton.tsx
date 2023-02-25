@@ -47,7 +47,15 @@ const Select = ({ showTheThing }) => {
     if(count > 0){
     setCount(prevCount => prevCount - 1);}
   }
-  const Submit = () => alert("Submitted");
+  const buy = () => {
+    try {
+      var url = "http://192.168.71.152:3000/buytokens?count=" + count
+      fetch(url)
+      alert("Amount Paid")
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
       showTheThing ?
@@ -69,7 +77,7 @@ const Select = ({ showTheThing }) => {
         Net Payable Amount : {count*10}
       </Text>
 
-      <TouchableOpacity style={styless.button} onPress={Submit}>
+      <TouchableOpacity style={styless.button} onPress={buy}>
         <Text> Pay Now </Text>
       </TouchableOpacity>
       

@@ -30,7 +30,7 @@ function Home({ navigation }) {
 function Display() {
   return(
     <View>
-      <Header />
+      {/* <Header /> */}
       <ViewToken />
     </View>
   );

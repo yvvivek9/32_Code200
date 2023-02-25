@@ -4,21 +4,18 @@ const bodyParser = require("body-parser");
 const app = express();
 const PORT = 3000;
 
-var arr = [10, 20, 30, 40, 50];
-var returr = {};
+var arr = [];
 
 app.get("/buytokens", (req, res)=>{
-    var n = req.body.count;
+    console.log("Hi")
+    var n = req.query.count;
     for(var i = 0; i < n; i++)
-        arr[i] = Math.random() * 100
+        arr.push(Math.random() * 10)
+    console.log(arr);
 })
 
 app.get("/viewtokens", (req, res)=>{
-    var n = arr.length;
-    for(var i = 0; i < n; i++)
-        returr = Object.assign(returr, {num: arr[i]})
-    console.log(returr)
-    res.send(returr);
+    res.send({data: arr})
 })
   
 app.listen(PORT, (error) =>{

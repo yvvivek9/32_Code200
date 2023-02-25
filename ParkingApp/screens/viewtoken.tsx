@@ -1,23 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, FlatList, Text, View} from 'react-native';
-
-type Movie = {
-  id: string;
-  title: string;
-  releaseYear: string;
-};
+import {ActivityIndicator, FlatList, Text, View, StyleSheet} from 'react-native';
 
 const App = () => {
   const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState<Movie[]>([]);
+  const [data, setData] = useState([]);
 
   const getMovies = async () => {
     try {
-      const response = await fetch('https://reactnative.dev/movies.json');
+      const response = await fetch('http://192.168.71.152:3000/viewtokens');
       const json = await response.json();
-      console.log(json);
-      await setData(json.movies);
-      
+      setData(json.data);
     } catch (error) {
       console.error(error);
     } finally {
@@ -30,22 +22,11 @@ const App = () => {
   }, []);
 
   return (
-    <View style={{flex: 1, padding: 24}}>
-      {isLoading ? (
-        <ActivityIndicator />
-      ) : (
-        <FlatList
-          data={data}
-          keyExtractor={({id}) => id}
-          renderItem={({item}) => (
-            <Text>
-              {item.title}, {item.releaseYear}
-            </Text>
-          )}
-        />
-      )}
+    <View style={{padding: 24}}>
+        <Text>{data[0]}</Text>
     </View>
   );
 };
+
 
 export default App;
