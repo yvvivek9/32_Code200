@@ -4,8 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Header from "./screens/header";
 import ViewButton from "./screens/viewbutton"
-import Select from "./screens/select"
-import CButton from "./screens/CButton"
 import Display from "./screens/display"
 
 
@@ -27,7 +25,6 @@ function Home({ navigation }) {
     <View>
       <Header />
       <ViewButton navigation={navigation} />
-      <Select />
     </View>
   );
 }
