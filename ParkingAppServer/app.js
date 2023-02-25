@@ -5,12 +5,15 @@ const app = express();
 const PORT = 3000;
 
 var arr = [];
+var x;
 
 app.get("/buytokens", (req, res)=>{
     console.log("Hi")
     var n = req.query.count;
-    for(var i = 0; i < n; i++)
-        arr.push(Math.random() * 10)
+    for(var i = 0; i < n; i++){
+        x = Math.random() * 10
+        arr.push(x.toString())
+    }
     console.log(arr);
 })
 

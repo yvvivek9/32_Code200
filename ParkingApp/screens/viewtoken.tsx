@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, FlatList, Text, View, StyleSheet} from 'react-native';
+import QRCode from 'react-native-qrcode-svg';
 
 const App = () => {
   const [isLoading, setLoading] = useState(true);
@@ -23,7 +24,8 @@ const App = () => {
 
   return (
     <View style={{padding: 24}}>
-        <Text>{data[0]}</Text>
+        <QRCode value={data[0]} />
+        <Text>{data.length - 1} QR left</Text>
     </View>
   );
 };
