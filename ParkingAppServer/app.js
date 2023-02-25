@@ -8,7 +8,6 @@ var arr = [];
 var x;
 
 app.get("/buytokens", (req, res)=>{
-    console.log("Hi")
     var n = req.query.count;
     for(var i = 0; i < n; i++){
         x = Math.random() * 10
@@ -18,6 +17,7 @@ app.get("/buytokens", (req, res)=>{
 })
 
 app.get("/viewtokens", (req, res)=>{
+    console.log(arr)
     res.send({data: arr})
 })
   

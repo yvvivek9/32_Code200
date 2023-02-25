@@ -49,7 +49,7 @@ const Select = ({ showTheThing }) => {
   }
   const buy = () => {
     try {
-      var url = "http://192.168.71.152:3000/buytokens?count=" + count
+      var url = "http://192.168.94.152:3000/buytokens?count=" + count
       fetch(url)
       alert("Amount Paid")
     } catch (error) {
