@@ -12,7 +12,7 @@ function App() {
 
   const buy = async () => {
     try {
-      var url = "http://172.16.174.58:3000/viewtokens"
+      var url = "http://3.111.245.252:3000/viewtokens"
       var call = await fetch(url)
       if(call != null){
         var response = await call.json()

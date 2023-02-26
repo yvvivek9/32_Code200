@@ -11,7 +11,7 @@ export default function App() {
 
   const buy = async () => {
     try {
-      var url = "http://172.16.174.58:3000/viewtokens"
+      var url = "http://3.111.245.252:3000/viewtokens"
       var call = await fetch(url)
       if(call != null){
         var response = await call.json()
@@ -72,7 +72,7 @@ export default function App() {
   const update = () => {
     used.forEach((x) => {
       try {
-        var url = "http://172.16.174.58:3000/update?num=" + x
+        var url = "http://3.111.245.252:3000/update?num=" + x
         fetch(url)
       } catch(error) {
         console.log(error)

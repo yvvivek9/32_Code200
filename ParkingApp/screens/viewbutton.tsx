@@ -49,7 +49,7 @@ const Select = ({ showTheThing }) => {
   }
   const buy = async () => {
     try {
-      var url = "http://172.16.174.58:3000/buytokens?count=" + count
+      var url = "http://3.111.245.252:3000/buytokens?count=" + count
       var call = await fetch(url)
       var response = await call.json()
       var jsonValue = JSON.stringify(response)
