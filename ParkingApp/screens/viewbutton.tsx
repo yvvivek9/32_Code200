@@ -1,10 +1,10 @@
 import React, {useState} from "react";
-import { SafeAreaView, StatusBar, StyleSheet, View, TouchableOpacity, Text } from "react-native";
+import { SafeAreaView, StatusBar, StyleSheet, View, TouchableOpacity, Text, Button } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import CButton from "./CButton";
 
 const Tokens = ({navigation}) => {
   const [show, setShow] = useState(false);
-  
   const changeview = () => {
     setShow(!show)
   }
@@ -17,7 +17,7 @@ const Tokens = ({navigation}) => {
           <CButton text={"Buy Token"} press={() => changeview()} />
           <CButton text={"View Token"} press={() => navigation.navigate('Display')} />
         </View>
-        <Select showTheThing={show}/>
+        <Select showTheThing={show} />
       </SafeAreaView>
     </>
   );
@@ -47,54 +47,65 @@ const Select = ({ showTheThing }) => {
     if(count > 0){
     setCount(prevCount => prevCount - 1);}
   }
-  const buy = () => {
+  const buy = async () => {
     try {
-      var url = "http://192.168.94.152:3000/buytokens?count=" + count
-      fetch(url)
+      var url = "http://172.16.174.58:3000/buytokens?count=" + count
+      var call = await fetch(url)
+      var response = await call.json()
+      var jsonValue = JSON.stringify(response)
+      await AsyncStorage.setItem('@storage_Key', jsonValue)
+      setCount(0)
       alert("Amount Paid")
     } catch (error) {
       console.log(error)
+      alert("Transaction Failed")
     }
   }
 
   return (
       showTheThing ?
       <View style={styless.container}>
-    
-      <View style={styless.countContainer}>
-        <Text>Count: {count}</Text>
+      <View style={styless.buttonContainer}>
+        <TouchableOpacity style={styless.button} onPress={() => dec()}>
+          <Text style={styless.font}>-</Text>
+        </TouchableOpacity>
+        <Text style={[styless.font, {marginTop: 8}]}>Count: {count}</Text>
+        <TouchableOpacity style={styless.button} onPress={() => inc()}>
+          <Text style={styless.font}>+</Text>
+        </TouchableOpacity>
       </View>
-
-      <TouchableOpacity style={styless.button} onPress={inc}>
-        <Text> + </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styless.button} onPress={dec}>
-        <Text> - </Text>
-      </TouchableOpacity>
-
-      <Text>
-        Net Payable Amount : {count*10}
-      </Text>
-
-      <TouchableOpacity style={styless.button} onPress={buy}>
-        <Text> Pay Now </Text>
-      </TouchableOpacity>
-      
+      <View style={[styless.buttonContainer, {marginTop: 20}]}>
+        <Text style={styless.font}>
+          Net Payable Amount : {count*10}
+        </Text>
+      </View>
+      <View style={styless.buttonContainer}>
+        <TouchableOpacity style={[styless.button, {marginTop: 25}]} onPress={() => buy()}>
+          <Text style={styless.font}>Pay Now</Text>
+        </TouchableOpacity>
+      </View>
       </View> : null
   );
 };
 
 const styless = StyleSheet.create({
   container: {
-    marginTop: 100
+    marginTop: 80
+  },
+  buttonContainer: {
+    marginTop: 10,
+    flexDirection: "row",
+    justifyContent: "space-around"
   },
   button: {
     alignItems: 'center',
-    backgroundColor: '#DDDDDD',
+    backgroundColor: "#8080ff",
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+    borderRadius: 5,
   },
-  countContainer: {
-    alignItems: 'center',
+  font: {
+    fontSize: 20,
   },
 });
 

@@ -11,10 +11,11 @@ const CButton = ({ text, press }) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "blue",
+    backgroundColor: "#0066ff",
     padding: 18,
     width: "46%",
     height: 60,
+    borderRadius: 20
   },
   text: {
     fontSize: 18,

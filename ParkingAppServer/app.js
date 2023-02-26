@@ -8,12 +8,14 @@ var arr = [];
 var x;
 
 app.get("/buytokens", (req, res)=>{
+    temp = []
     var n = req.query.count;
     for(var i = 0; i < n; i++){
         x = Math.random() * 10
         arr.push(x.toString())
     }
     console.log(arr);
+    res.send({data: arr})
 })
 
 app.get("/viewtokens", (req, res)=>{
